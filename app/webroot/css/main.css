@@ -8,9 +8,6 @@
 /**********************************
 共通要素
 ***********************************/
-body{
-	padding-top: 41px;
-}
 
 
 /**********************************
@@ -73,6 +70,20 @@ body{
 /**********************************
 ウェルカムページ
 ***********************************/
+.logo a{
+  font-size: 3em;
+  color:#9e9e9e;
+}
+.logo a:hover{
+	text-decoration: none;
+}
+
+.black_bar{
+	width: 100%;
+	height: 5px;
+	background: #515151;
+}
+
 .Wel_top{
 	background: #f1f1f1;
 	padding: 15px 0;

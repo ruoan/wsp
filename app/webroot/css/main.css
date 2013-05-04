@@ -257,6 +257,7 @@ LEFTコンテンツ
 	border: 1px solid #f6f6f6;
 	margin-bottom: 15px;
 	border-radius: 5px;
+	background: white;
 }
 .timeline-list li:hover{
   border-color: #c8e6f1;
@@ -272,7 +273,14 @@ LEFTコンテンツ
 }
 .timeline-list .item-controll a{
 	margin: 0 3px;
+	font-size: 12px;
+}
+.timeline-list .item-controll a span{
+	margin-left: 7px;
+}
+.timeline-list .item-controll a i{
 	font-size: 16px;
+	margin-right: 4px;
 }
 .timeline-list .item-controll a:hover{
 	text-decoration: none;
@@ -287,6 +295,7 @@ LEFTコンテンツ
 .timeline-list .item-wrap img{
 	float:left;
 	margin-right: 15px;
+	width: 250px;
 }
 .timeline-list .item-wrap .item-info{
 	
@@ -305,4 +314,46 @@ LEFTコンテンツ
 .timeline-list .item-wrap .item-info b span{
 	color: #952121;
 }
+
+/**********************************
+カート
+***********************************/
+.cart{
+	
+}
+
+.cart .droparea{
+  position: relative;
+	text-align: center;
+	color:#cdcdcd;
+}
+.cart .droparea span{
+	position: absolute;
+	display: block;
+	height: 40px;
+	width: 40px;
+	color: #007182;
+	background: #f1f1f1;
+	border-radius: 20px;
+	font-size: 25px;
+	line-height: 40px;
+	left: 100px;
+	top: 40px;
+}
+.cart .droparea a i{
+	font-size: 150px;
+}
+.cart .droparea a{
+	color: #cdcdcd;
+}
+.cart .droparea a:hover{
+	text-decoration: none;
+	color:#5db3c2;
+}
+.cart .droparea p{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
 

@@ -47,15 +47,21 @@ class LoginsController extends AppController {
 	public $uses = array();
 
 	public function twitter() {
+		//変数定義
 		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
 		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
-		$oauth_callback = Router::url('logins/twitter_callback', true);
+		$oauth_callback = Router::url('/logins/twitter_callback', true);
 
+		//TwitterAPI接続OAuthオブジェクト生成
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
-		$request_token = $connection -> getRequestToken($oauth_callback);
+
+		//Twitter未認証request_token取得
+		$request_token = $connection->getRequestToken($oauth_callback);
 		$token = $request_token['oauth_token'];
+		$this->Session->write('twitter.token', $token);
 		$this->Session->write('twitter.token_secret', $request_token['oauth_token_secret']);
-		
+
+		//成功時(case 200)認証済token取得
 		switch ($connection->http_code) {
 			case 200 :
 				/* Build authorize URL and redirect user to Twitter. */
@@ -66,11 +72,30 @@ class LoginsController extends AppController {
 				/* Show notification if something went wrong. */
 				echo 'Could not connect to Twitter. Refresh the page or try again later.';
 		}
+
+	}
+
+	public function twitter_callback() {
+		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
+		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
+		$url = $connection->getAuthorizeURL($token);
+
+		if (isset($this->request['oauth_token']) && 
+				$this->Session->read('oauth_token') !== $this->request['url']['oauth_token']) {
+			$this->Session->delete('twitter.oauth_token');
+			$this->Session->delete('twitter.oauth_secret');
+		}
+		$connection = new TwitterOAuth(
+							$consumer_key, 
+							$consumer_secret, 
+							$this->Session->read('twitter.oauth_token'), 
+							$this->Session->read('twitter.oauth_token_secret'));
+		$access_token = $connection->getAccessToken($this->request['oauth_verifier']);
 		
-		
-		
-		
-		
+		$this->Session->write('twitter.access_token', $access_token);
+		$this->Session->delete('twitter.oauth_token');
+		$this->Session->delete('twitter.oauth_secret');
+
 	}
 
 }

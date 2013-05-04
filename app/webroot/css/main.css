@@ -12,7 +12,7 @@ a{
 	color: #007182;
 }
 
-.left hr{
+.left-block hr{
   border-top: 1px solid #e2e2e2;
   border-bottom: 1px solid #fafafa;
 }
@@ -109,7 +109,7 @@ a{
 	text-decoration: none;
 }
 
-.left{
+.left-block{
 	position: fixed;
 	left: 0;
 	top: 30px;
@@ -193,6 +193,15 @@ LEFTコンテンツ
 	margin-left: 15px;
 	width: 150px;
 }
+.username a {
+	display: inline-block;
+	padding: 3px 8px;
+	border-radius: 3px;
+}
+.username a:hover{
+	text-decoration: none;
+	background: #e6e6e6;
+}
 .profile_detail .username b{
 	margin-top: 8px;
 	margin-left: 5px;
@@ -202,25 +211,98 @@ LEFTコンテンツ
   text-align: right;
 	font-size: 12px;
 }
-.left .menu ul{
+.left-block .menu ul{
 	list-style: none;
 	font-size: 1.3em;
+	margin-left: 0px;
 }
-.left .menu ul li{
+.left-block .menu ul li{
 	margin-bottom: 15px;
 }
 
-.left .menu ul li i{
+.left-block .menu ul li i{
 	margin-right: 15px;
 }
 
-.left .menu a:hover{
+.left-block .menu a{
+	color: #6b6b6b;
+}
+
+.left-block .menu a:hover{
 	text-decoration: none;
+	color: #007182;
 }
 
 
+/**********************************
+タイムライン
+***********************************/
+.timeline{
+	padding: 15px;
+}
+.loading{
+	text-align: center;
+	background: #f4f4f4;
+	padding: 15px;
+	font-size: 1.3em;
+	color:#969696;
+}
 
+/*リスト型*/
+.timeline-list{
+	list-style: none;
+	margin: 0px;
+}
+.timeline-list li{
+	border: 1px solid #f6f6f6;
+	margin-bottom: 15px;
+	border-radius: 5px;
+}
+.timeline-list li:hover{
+  border-color: #c8e6f1;
+  box-shadow: 0px 0px 3px #e8e8e8;
+}
+.timeline-list .item-controll{
+	background: #f6f6f6;
+	border-radius: 0px 0px 4px 4px;
+	padding: 3px 10px;
+}
+.timeline-list .item-controll div.left{
+	float: left;
+}
+.timeline-list .item-controll a{
+	margin: 0 3px;
+	font-size: 16px;
+}
+.timeline-list .item-controll a:hover{
+	text-decoration: none;
+}
+.timeline-list .item-controll div.right{
+	float: right;
+}
 
-
-
+.timeline-list .item-wrap{
+  padding: 8px;	
+}
+.timeline-list .item-wrap img{
+	float:left;
+	margin-right: 15px;
+}
+.timeline-list .item-wrap .item-info{
+	
+}
+@media (max-width: 767px) {
+	.timeline-list .item-wrap .item-info{
+	  float: left;
+  }
+}
+.timeline-list .item-wrap .item-info b{
+	display: block;
+	font-size: 1.2em;
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+.timeline-list .item-wrap .item-info b span{
+	color: #952121;
+}
 

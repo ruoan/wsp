@@ -20,6 +20,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('AppController', 'Controller');
+App::import('Lib', 'twitteroauth');
 
 /**
  * Static content controller
@@ -29,14 +30,14 @@ App::uses('AppController', 'Controller');
  * @package       app.Controller
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
-class PagesController extends AppController {
+class LoginsController extends AppController {
 
 	/**
 	 * Controller name
 	 *
 	 * @var string
 	 */
-	public $name = 'Pages';
+	public $name = 'Logins';
 
 	/**
 	 * This controller does not use a model
@@ -45,35 +46,32 @@ class PagesController extends AppController {
 	 */
 	public $uses = array();
 
-	/**
-	 * Displays a view
-	 *
-	 * @param mixed What page to display
-	 * @return void
-	 */
-	public function display() {
+	public function twitter() {
+		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
+		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
+		$oauth_callback = Router::url('logins/twitter_callback', true);
+
+		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
+		$request_token = $connection -> getRequestToken($oauth_callback);
+		$token = $request_token['oauth_token'];
+		$this->Session->write('twitter.token_secret', $request_token['oauth_token_secret']);
 		
-		$path = func_get_args();
-
-		$count = count($path);
-		if (!$count) {
-			$this -> redirect('/');
+		switch ($connection->http_code) {
+			case 200 :
+				/* Build authorize URL and redirect user to Twitter. */
+				$url = $connection->getAuthorizeURL($token);
+				$this->redirect($url);
+				break;
+			default :
+				/* Show notification if something went wrong. */
+				echo 'Could not connect to Twitter. Refresh the page or try again later.';
 		}
-		$page = $subpage = $title_for_layout = null;
-
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this -> set(compact('page', 'subpage', 'title_for_layout'));
-		$this -> render(implode('/', $path));
-	}
-	public function home(){
+		
+		
+		
+		
 		
 	}
+
 }
+?>

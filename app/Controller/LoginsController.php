@@ -76,25 +76,47 @@ class LoginsController extends AppController {
 	}
 
 	public function twitter_callback() {
+		//変数定義
 		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
 		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
-		$url = $connection->getAuthorizeURL($token);
-
-		if (isset($this->request['oauth_token']) && 
-				$this->Session->read('oauth_token') !== $this->request['url']['oauth_token']) {
-			$this->Session->delete('twitter.oauth_token');
-			$this->Session->delete('twitter.oauth_secret');
+		
+		//接続先url取得
+		//$url = $connection->getAuthorizeURL($token);
+		
+		//リクエストとセッションが一致しない場合のエラー処理
+		if (isset($this->request['url']['oauth_token']) && 
+				$this->Session->read('twitter.token') !== $this->request['url']['oauth_token']) {
+			$this->Session->delete('twitter.token');
+			$this->Session->delete('twitter.token_secret');
 		}
+				
+		//Twitter接続オブジェクト生成		
 		$connection = new TwitterOAuth(
 							$consumer_key, 
 							$consumer_secret, 
-							$this->Session->read('twitter.oauth_token'), 
-							$this->Session->read('twitter.oauth_token_secret'));
+							$this->Session->read('twitter.token'), 
+							$this->Session->read('twitter.token_secret'));
+							
+		//accesstokenの取得
 		$access_token = $connection->getAccessToken($this->request['oauth_verifier']);
-		
 		$this->Session->write('twitter.access_token', $access_token);
-		$this->Session->delete('twitter.oauth_token');
-		$this->Session->delete('twitter.oauth_secret');
+		$this->Session->delete('twitter.token');
+		$this->Session->delete('twitter.token_secret');
+		
+		//DB処理
+		//処理省略
+		Debugger::dump($access_token);
+		//基本情報の取得
+		$connection = new TwitterOAuth(
+							$consumer_key, 
+							$consumer_secret, 
+							$access_token['amp;oauth_token'], 
+							$access_token['oauth_token_secret']);
+		$user_name=$connection->get('account/verify_credentials');
+		
+		var_dump($user_name);
+		
+		//$this->Session->write();
 
 	}
 

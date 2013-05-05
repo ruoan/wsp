@@ -19,7 +19,7 @@
 			    	<div class="wel_top_social">
 			    	
 			    	
-				    	<a href="<?php echo $this->Html->url('/logins/facebook'); ?>" class="button-social button-facebook"><i class="icon-facebook"></i>Facebookでログイン</a>
+				    	<a href="#" class="button-social button-facebook"><i class="icon-facebook"></i>Facebookでログイン</a>
 				    	
 				    	
 				    	<a href="<?php echo $this->Html->url('/logins/twitter'); ?>" class="button-social button-twitter"><i class="icon-twitter"></i>Twitterでログイン</a>

@@ -247,6 +247,16 @@ LEFTコンテンツ
 	font-size: 1.3em;
 	color:#969696;
 }
+.timeline b{
+	display: block;
+	font-weight: normal;
+	margin-bottom: 10px;
+	color: #888;
+}
+.timeline b span{
+	color: #952121;
+	font-size: 1.2em;
+}
 
 /*リスト型*/
 .timeline-list{
@@ -305,15 +315,29 @@ LEFTコンテンツ
 	  float: left;
   }
 }
-.timeline-list .item-wrap .item-info b{
-	display: block;
-	font-size: 1.2em;
-	font-weight: normal;
-	margin-bottom: 10px;
+
+
+/* グリッド型 */
+
+.grid-line{
+	float: left;
+	width: 300px;
+	margin-right: 8px;
 }
-.timeline-list .item-wrap .item-info b span{
-	color: #952121;
+.grid-line:last-child{
+	margin-right: 0px;
 }
+
+.item-box{
+	border: 1px solid #f6f6f6;
+	margin-bottom: 8px;
+	padding: 5px;
+}
+.item-box:hover{
+	border-color: #c8e6f1;
+  box-shadow: 0px 0px 3px #e8e8e8;
+}
+
 
 /**********************************
 カート

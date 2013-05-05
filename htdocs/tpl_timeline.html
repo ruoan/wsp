@@ -23,9 +23,8 @@
     	<div class="menu_area clearfix">
 	    	<div class="logo_small"><a href="#">The Mall</a></div>
 	    	<div class="controller">
-		    	<a href="#"><i class="icon-th-large"></i></a>
-		    	<a href="#" class="active"><i class="icon-th-list"></i></a>
-		    	<a href="#"><i class="icon-star"></i></a>
+		    	<a class="tip" title="グリッドレイアウト" href="#"><i class="icon-th-large"></i></a>
+		    	<a class="tip" title="タイムライン" href="#" class="active"><i class="icon-th-list"></i></a>
 	    	</div>
 	    </div>
     </div>
@@ -37,7 +36,8 @@
 			    <div class="username dropdown">
 					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ruoan Xu<b class="caret"></b></a>
 					  <ul class="dropdown-menu">
-					    <!-- dropdown menu links -->
+					    <li><a href="#">プロフィール変更</a></li>
+					    <li><a href="#">アカウント管理</a></li>
 					  </ul>
 					</div>
 					<div class="logout">
@@ -82,10 +82,10 @@
 				    	  <a href="#">コメント(10)</a>
 				    	</div>
 			    	  <div class="right">
-			    	    <a href="#" title="facebookに投稿"><i class="icon-facebook"></i></a>
-				    	  <a href="#" title="twitterに投稿"><i class="icon-twitter"></i></a>
-				    	  <a href="#" title="Google+に投稿"><i class="icon-googleplus"></i></a>
-			    	    <a href="#" title="カートに入れる"><i class="icon-shopping-cart"></i></a>
+			    	    <a href="#" class="tip" title="facebookに投稿"><i class="icon-facebook"></i></a>
+				    	  <a href="#" class="tip" title="twitterに投稿"><i class="icon-twitter"></i></a>
+				    	  <a href="#" class="tip" title="Google+に投稿"><i class="icon-googleplus"></i></a>
+			    	    <a href="#" class="tip" title="カートに入れる"><i class="icon-shopping-cart"></i></a>
 			    	  </div>
 			    	</div>
 		    	</li>
@@ -250,6 +250,7 @@
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../app/webroot/js/bootstrap.min.js"></script>
+    <script src="../app/webroot/js/common.js"></script>
     <!--[if lte IE 7]><script src="../app/webroot/js/lte-ie7.js"></script><![endif]-->
     
   </body>

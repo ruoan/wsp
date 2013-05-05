@@ -21,6 +21,7 @@
  */
 App::uses('AppController', 'Controller');
 App::import('Lib', 'twitteroauth');
+App::import('Lib', 'facebook');
 
 /**
  * Static content controller
@@ -47,15 +48,21 @@ class LoginsController extends AppController {
 	public $uses = array();
 
 	public function twitter() {
+		//変数定義
 		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
 		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
-		$oauth_callback = Router::url('logins/twitter_callback', true);
+		$oauth_callback = Router::url('/logins/twitter_callback', true);
 
+		//TwitterAPI接続OAuthオブジェクト生成
 		$connection = new TwitterOAuth($consumer_key, $consumer_secret);
-		$request_token = $connection -> getRequestToken($oauth_callback);
+
+		//Twitter未認証request_token取得
+		$request_token = $connection->getRequestToken($oauth_callback);
 		$token = $request_token['oauth_token'];
+		$this->Session->write('twitter.token', $token);
 		$this->Session->write('twitter.token_secret', $request_token['oauth_token_secret']);
-		
+
+		//成功時(case 200)認証済token取得
 		switch ($connection->http_code) {
 			case 200 :
 				/* Build authorize URL and redirect user to Twitter. */
@@ -66,11 +73,73 @@ class LoginsController extends AppController {
 				/* Show notification if something went wrong. */
 				echo 'Could not connect to Twitter. Refresh the page or try again later.';
 		}
-		
-		
-		
-		
-		
+
+	}
+
+	public function twitter_callback() {
+		//変数定義
+		$consumer_key = 'b7crCjiIs1pHYwK1e1i21A';
+		$consumer_secret = 'pcG4pWnxzTnj2eEndgKek7XWYbjxgMpIaQxWbr0gqs';
+
+		//接続先url取得
+		//$url = $connection->getAuthorizeURL($token);
+
+		//リクエストとセッションが一致しない場合のエラー処理
+		if (isset($this->request['url']['oauth_token']) && $this->Session->read('twitter.token') !== $this->request['url']['oauth_token']) {
+			$this->Session->delete('twitter.token');
+			$this->Session->delete('twitter.token_secret');
+		}
+
+		//Twitter接続オブジェクト生成
+		$connection = new TwitterOAuth($consumer_key, $consumer_secret, $this->Session->read('twitter.token'), $this->Session->read('twitter.token_secret'));
+
+		//accesstokenの取得
+		$access_token = $connection->getAccessToken($this->request['oauth_verifier']);
+		$this->Session->write('twitter.access_token', $access_token);
+		$this->Session->delete('twitter.token');
+		$this->Session->delete('twitter.token_secret');
+
+		//DB処理
+		//処理省略
+		Debugger::dump($access_token);
+		//基本情報の取得
+		$connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token['amp;oauth_token'], $access_token['oauth_token_secret']);
+		$user_name = $connection->get('account/verify_credentials');
+
+		var_dump($user_name);
+	}
+
+	public function facebook() {
+		//変数定義
+		$app_id = '296251410509103';
+		$app_secret = '4d5c7b8a532fd03eb0f0f20306c962a3';
+		$callback = Router::url('/logins/facebook_callback', true);
+
+		//facebookAPI接続OAuthオブジェクト生成
+		$connection = new facebook(array('appId' => $app_id, 'secret' => $app_secret));
+
+		//リダイレクト
+		$url = $connection->getLoginUrl(array('redirect_uri' => $callback, 'scope' => 'email,publish_actions'));
+		$this->redirect($url);
+
+	}
+
+	public function facebook_callback() {
+		$app_id = '296251410509103';
+		$app_secret = '4d5c7b8a532fd03eb0f0f20306c962a3';
+		$connection = new facebook(array('appId' => $app_id, 'secret' => $app_secret));
+		$user = $connection->getUser();
+
+		if ($user) {
+			$user_profile = $connection->api('/me');
+			$this->Session->write('user_profile', $user_profile);
+
+		} else {
+
+		}
+
+		$this->redirect('/timelines/index');
+
 	}
 
 }

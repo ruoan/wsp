@@ -9,15 +9,15 @@
 共通要素
 ***********************************/
 html{
-	background: #d6d6d6;
+	background: #f0f0f0;
 }
 .left-block hr{
   border-top: 1px solid #e2e2e2;
   border-bottom: 1px solid #fafafa;
 }
 
-a	{	color:#bb1b59;	text-decoration: none;}
-a:hover	{	color:#f13c81;	text-decoration: none;}
+a	{	color:#92ba18;	text-decoration: none;}
+a:hover	{	color:#bcd866;	text-decoration: none;}
 
 /**********************************
 ボタン
@@ -66,12 +66,12 @@ a:hover	{	color:#f13c81;	text-decoration: none;}
 	width: 100%;
 	min-width: 1000px;
 	height: 5px;
-	background: #d04971;
+	background: #92ba18;
 }
 .black_bar{
 	width: 100%;
 	height: 5px;
-	background: #d04971;
+	background: #92ba18;
 }
 
 .container{
@@ -154,15 +154,14 @@ TOPナビ
 	position: fixed;
 	top: 5px;
 	right: 20px;
-	background: #d04971;
+	background: #92ba18;
 }
 .user_menu a{
 	color: white;
 }
 .user_menu a:hover{
-	color: #f5a9bc;
+	color: #ebf5cc;
 }
-
 /*User Profile*/
 .user_profile{
 	display: block;
@@ -171,7 +170,7 @@ TOPナビ
 .user_profile img{
 	float: left;
 	margin-right: 3px;
-	border: 2px solid #e85c86;
+	border: 2px solid #7d9c20;
 }
 .user_profile span{
   float: left;
@@ -194,7 +193,7 @@ TOPナビ
 	padding: 3px 20px;
 }
 .user_menu ul li a:hover{
-  background: #ce6384;
+  background: #7d9c20;
   color: white;
 }
 .user_menu ul li a i{
@@ -221,7 +220,7 @@ TOPナビ
 .site_title{
 	font-size: 2.5em;
 	font-weight: bold;
-	color: #d04971;
+	color: #92ba18;
 	margin-top: -9px;
 	text-align: center;
 }
@@ -260,6 +259,13 @@ TOPナビ
 ul.left_menu{
 	margin-left: 15px;
 }
+ul.left_menu a{
+	color: #606060;
+}
+ul.left_menu a:hover{
+	color: #9a9a9a;
+	text-decoration: underline;
+}
 ul.left_menu li{
 	margin-bottom: 8px;
 }
@@ -288,10 +294,10 @@ ul.left_menu li i{
 	margin-bottom: 40px;
 }
 .item_block:hover{
-	background: rgba(255,255,255,0.2);
+	background: rgba(255,255,255,0.3);
 }
 .item_block:hover img{
-	border: 2px solid #d04971; 
+	border: 2px solid #92ba18; 
 }
 .item_block h3{
 	font-weight: bold;
@@ -318,7 +324,7 @@ ul.left_menu li i{
 /* 商品ブロック　コメント */
 .item_ctrl{
 	margin-top: 15px;
-	background: #d04971;
+	background: #92ba18;
 	padding: 0px 8px;
 }
 .item_ctrl a{
@@ -327,7 +333,7 @@ ul.left_menu li i{
 	color: white;
 }
 .item_ctrl a:hover{
-	background: #e27797;
+	background: #b1d448;
 }
 .item_ctrl_left{
 	float: left;
@@ -341,8 +347,8 @@ ul.left_menu li i{
 }
 .item_ctrl .sepline{
 	width: 0px;
-	border-right:1px solid #d76889;
-	border-left: 1px solid #b83a60;
+	border-right:1px solid #a5cc2f;
+	border-left: 1px solid #89b014;
 	margin: 0px 3px;
 }
 

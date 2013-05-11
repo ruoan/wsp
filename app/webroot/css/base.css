@@ -9,9 +9,6 @@ body{
 	clear:both;
 }
 
-a	{	color:#bb1b59;	text-decoration: none;}
-a:hover	{	color:#f13c81;	text-decoration: none;}
-
 img{
 	-ms-interpolation-mode: bicubic;
 }

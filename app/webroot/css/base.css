@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	font-size:14px;
+	font-family: verdana,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+}
+.fclear{
+	clear:both;
+}
+
+a	{	color:#bb1b59;	text-decoration: none;}
+a:hover	{	color:#f13c81;	text-decoration: none;}
+
+img{
+	-ms-interpolation-mode: bicubic;
+}
+.clearfix:after{
+	content: ".";  
+	display: block;  
+	visibility: hidden;  
+	height: 0.1px;  
+	font-size: 0.1em;  
+	line-height: 0;  
+	clear: both;  
+}
+
+.clearfix{
+	*zoom:1;
+}

@@ -354,18 +354,18 @@ LEFTコンテンツ
 .cart .droparea span{
 	position: absolute;
 	display: block;
-	height: 40px;
-	width: 40px;
+	height: 30px;
+	width: 30px;
 	color: #007182;
 	background: #f1f1f1;
-	border-radius: 20px;
-	font-size: 25px;
-	line-height: 40px;
+	border-radius: 15px;
+	font-size: 18px;
+	line-height: 30px;
 	left: 100px;
-	top: 40px;
+	top: 25px;
 }
 .cart .droparea a i{
-	font-size: 150px;
+	font-size: 100px;s
 }
 .cart .droparea a{
 	color: #cdcdcd;

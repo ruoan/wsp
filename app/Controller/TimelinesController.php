@@ -20,8 +20,6 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('AppController', 'Controller');
-App::import('Lib', 'twitteroauth');
-App::import('Lib', 'facebook');
 
 
 /**

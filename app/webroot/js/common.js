@@ -12,7 +12,7 @@ $.fn.profiledrop = function(config){
 	var hover_flg = false;
 	var self = this;
 	var defaults = {
-		speed : "fast",
+		speed : "fast"
 	}
 	
 	//configと結合

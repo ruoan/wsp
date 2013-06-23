@@ -33,26 +33,37 @@ App::import('Lib', 'facebook');
  */
 class LoginsController extends AppController {
 
-	/**
-	 * Controller name
-	 *
-	 * @var string
-	 */
-	public $name = 'Logins';
+    /**
+     * Controller name
+     *
+     * @var string
+     */
+    public $name = 'Logins';
 
-	/**
-	 * This controller does not use a model
-	 *
-	 * @var array
-	 */
-	public $uses = array();
-    
+    /**
+     * This controller does not use a model
+     *
+     * @var array
+     */
+    public $uses = array();
+
     private $session_key = array(
         'twitter_token'         => 'twitter.token',
         'twitter_token_secret'  => 'twitter.token_secret',
         'twitter_access_token'  => 'twitter.access_token'
     );
+	
+	/**
+	 * アクション前処理
+	 */
+	function beforeFilter(){
+		//認証不要アクション設定
+		$this->Auth->allow();
+	}
 
+    /**
+     * Twitterログインアクション
+     */
 	public function twitter() {
 		//変数定義
 		$consumer_key = Configure::read('Twitter.consumer_key');
@@ -82,6 +93,9 @@ class LoginsController extends AppController {
 
 	}
 
+    /**
+     * Twitterコールバックアクション
+     */
 	public function twitter_callback() {
 		//変数定義
 		$consumer_key = Configure::read('Twitter.consumer_key');
@@ -91,11 +105,15 @@ class LoginsController extends AppController {
 		//$url = $connection->getAuthorizeURL($token);
 
 		//リクエストとセッションが一致しない場合のエラー処理
-		if (isset($this->request['url']['oauth_token']) && 
+		if (isset($this->request->query['oauth_token']) && 
 		      $this->Session->read($this->session_key['twitter_token']) !== 
-		      $this->request['url']['oauth_token']) {
+		      $this->request->query['oauth_token']) {
+		    
+            //セッションクリア
 			$this->Session->delete($this->session_key['twitter_token']);
 			$this->Session->delete($this->session_key['twitter_token_secret']);
+            //トップページにリダイレクト
+            return $this->redirect('/');
 		}
 
 		//Twitter接続オブジェクト生成
@@ -105,25 +123,60 @@ class LoginsController extends AppController {
 		                      $this->Session->read($this->session_key['twitter_token']), 
 		                      $this->Session->read($this->session_key['twitter_token_secret']));
 
-		//accesstokenの取得
+		//AccessTokenの取得
 		$access_token = $connection->getAccessToken($this->request['url']['oauth_verifier']);
-		$this->Session->write($this->session_key['twitter_access_token'], $access_token);
-		$this->Session->delete($this->session_key['twitter_token']);
-		$this->Session->delete($this->session_key['twitter_token_secret']);
-
-		//DB処理
-		//基本情報の取得
-		$connection = new TwitterOAuth(
-		                      $consumer_key, 
-		                      $consumer_secret, 
-		                      $access_token['oauth_token'],
-		                      $access_token['oauth_token_secret']);
-		$user_name = $connection->get('account/verify_credentials');
+        //Twitterでのログインに成功した場合
+        if(isset($access_token)){
+            
+			//AccessTokenをセッションにセット
+    		$this->Session->write($this->session_key['twitter_access_token'], $access_token);
+			//未認証RequestTokenをセッションから削除
+    		$this->Session->delete($this->session_key['twitter_token']);
+    		$this->Session->delete($this->session_key['twitter_token_secret']);
+            
+    		//アカウントアップデート
+    		//該当のアカウントがない場合は新規登録
+    		$updateTwitterAccountRes = $this->updateTwitterAccount(
+                      $consumer_key, 
+                      $consumer_secret, 
+                      $access_token['oauth_token'],
+                      $access_token['oauth_token_secret']);
+            
+			if($updateTwitterAccountRes){
+			
+	            //ログイン情報セット
+	            $user['SocialAccount']['token'] = $access_token['oauth_token'];
+				$user['SocialAccount']['secret'] = $access_token['oauth_token_secret'];
+	            
+	            //Authコンポーネントにてログイン
+	            //social_typeが'TW'のものに限定
+	            $this->Auth->scope(array(
+	            	'SocialAccount.social_type' => Configure::read('Twitter.social_type')));
+	            $this->Auth->login($user);
+					
+			} else {
+				return $this->cakeError('error');
+			}
         
-        Debugger::dump($user_name);
-
+        } else {
+        //Twitterログインエラー処理
+            return $this->cakeError('error404');
+        }
 	}
 
+    private function updateTwitterAccount($cons_key, $cons_secret, $token, $token_secret){
+        //OAuthコネクション取得
+        $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
+        $account_info = $connection->get('account/verify_credentials');
+        
+		//SocialAccountモデルでレコード更新（追加）
+        
+    }
+
+
+    /**
+     * Facebookログインアクション
+     */
 	public function facebook() {
 		//変数定義
 		$app_id = '296251410509103';
@@ -138,7 +191,9 @@ class LoginsController extends AppController {
 		$this->redirect($url);
 
 	}
-
+    /**
+     * Facebookコールバックアクション
+     */
 	public function facebook_callback() {
 		$app_id = '296251410509103';
 		$app_secret = '4d5c7b8a532fd03eb0f0f20306c962a3';

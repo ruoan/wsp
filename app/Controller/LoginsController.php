@@ -126,8 +126,8 @@ class LoginsController extends AppController {
 
 	public function facebook() {
 		//変数定義
-		$app_id = '296251410509103';
-		$app_secret = '4d5c7b8a532fd03eb0f0f20306c962a3';
+		$app_id = Configure::read('Facebook.apl_id');
+		$app_secret = Configure::read('Facebook.apl_secret');
 		$callback = Router::url('/logins/facebook_callback', true);
 
 		//facebookAPI接続OAuthオブジェクト生成
@@ -140,21 +140,25 @@ class LoginsController extends AppController {
 	}
 
 	public function facebook_callback() {
-		$app_id = '296251410509103';
-		$app_secret = '4d5c7b8a532fd03eb0f0f20306c962a3';
+		$app_id = Configure::read('Facebook.apl_id');
+		$app_secret = Configure::read('Facebook.apl_secret');
 		$connection = new facebook(array('appId' => $app_id, 'secret' => $app_secret));
 		$user = $connection->getUser();
 
 		if ($user) {
 			$user_profile = $connection->api('/me');
 			$this->Session->write('user_profile', $user_profile);
-
+			facebook_authenticate();
 		} else {
 
 		}
 
 		$this->redirect('/timelines/index');
 
+	}
+	
+	private function facebook_authenticate(){
+		
 	}
 
 }

@@ -31,7 +31,7 @@ class SocialAccount extends AppModel {
 		//token: IDとして使用
 		$member_data['token']= $token;
 		//secret: パスワードとして使用
-		$member_data['secret']= $secret;
+		$member_data['secret']= $token_secret;
 		//ログイン元サイトの種類: Twitterでは"TW"
 		$member_data['social_type']= Configure::read('Twitter.social_type');
 		//フルネーム
@@ -50,12 +50,10 @@ class SocialAccount extends AppModel {
 		//DBが取得できた場合（既存ユーザーの場合）
 		if($account_exsisting_data){
 			//取得したIDを更新データへセット
-			$member_data['id'] = $account_exsisting['SocialAccount']['id'];
+			$member_data['id'] = $account_exsisting_data['SocialAccount']['id'];
 		//DBが取得できない場合（新規ユーザーの場合）	
 		}else{
-			//SocialAccountのIDの最大値を取得し+1を新規IDとして
-			$new_id_number = $this->find('first', array("fields" => "MAX(SocialAccount.id) as max_number"));
-			$member_data['id'] = $new_id_number + 1;
+			//処理なし
 		}
 		$this->create();
 		$this->save(Array("SocialAccount" => $member_data));

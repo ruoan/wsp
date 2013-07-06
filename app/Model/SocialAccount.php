@@ -39,15 +39,15 @@ class SocialAccount extends AppModel {
 		
 		
 		//フルネーム
-		$member_data['name']= $account_info['name'];
+		$member_data['name']= $account_info->name;
 		//スクリーンネーム
-		$member_data['screen_name']= $account_info['screen_name'];
+		$member_data['screen_name']= $account_info->screen_name;
 		//プロフィール用画像URL
-		$member_data['profile_image_url']= $account_info['profile_image_url'];
+		$member_data['profile_image_url']= $account_info->profile_image_url;
 		//アカウントURL
-		$member_data['url']= $account_info['url'];
+		$member_data['url']= $account_info->url;
 		//e-mailアドレス
-		$member_data['email']= $account_info['email'];
+		$member_data['email']= $account_info->email;
 
 		//引数からのtokenがDBへ登録済みの既存ユーザーかを確認
 		$account_exsisting_data = $this->findByToken($token);

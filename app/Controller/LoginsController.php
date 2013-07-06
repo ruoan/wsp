@@ -125,6 +125,7 @@ class LoginsController extends AppController {
 
 		//AccessTokenの取得
 		$access_token = $connection->getAccessToken($this->request['url']['oauth_verifier']);
+
         //Twitterでのログインに成功した場合
         if(isset($access_token)){
             
@@ -171,6 +172,7 @@ class LoginsController extends AppController {
         //OAuthコネクション取得
         $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
         $account_info = $connection->get('account/verify_credentials');
+
 		//SocialAccountモデルでレコード更新（追加）
         $this->SocialAccount->updateInsertAccount($token, $token_secret, $account_info);
     }

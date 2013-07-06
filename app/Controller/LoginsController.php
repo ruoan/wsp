@@ -45,7 +45,7 @@ class LoginsController extends AppController {
      *
      * @var array
      */
-    public $uses = array();
+    public $uses = array('SocialAccount');
 
     private $session_key = array(
         'twitter_token'         => 'twitter.token',
@@ -171,7 +171,6 @@ class LoginsController extends AppController {
         //OAuthコネクション取得
         $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
         $account_info = $connection->get('account/verify_credentials');
-        
 		//SocialAccountモデルでレコード更新（追加）
         $this->SocialAccount->updateInsertAccount($token, $token_secret, $account_info);
     }

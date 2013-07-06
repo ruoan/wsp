@@ -34,6 +34,10 @@ class SocialAccount extends AppModel {
 		$member_data['secret']= $token_secret;
 		//ログイン元サイトの種類: Twitterでは"TW"
 		$member_data['social_type']= Configure::read('Twitter.social_type');
+		
+		Debugger::dump($account_info);
+		
+		
 		//フルネーム
 		$member_data['name']= $account_info['name'];
 		//スクリーンネーム

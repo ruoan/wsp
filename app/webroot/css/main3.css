@@ -63,10 +63,12 @@ a:hover	{	color:#bcd866;	text-decoration: none;}
 ***********************************/
 .topnav_bar{
 	position: fixed;
+	top: 0px;
 	width: 100%;
 	min-width: 1000px;
 	height: 5px;
 	background: #92ba18;
+	z-index:1000;
 }
 .black_bar{
 	width: 100%;
@@ -78,13 +80,6 @@ a:hover	{	color:#bcd866;	text-decoration: none;}
 	width: 1000px;
 	margin: auto;
 }
-
-.layout_left{
-  float: left;
-	width: 200px;
-	margin-top: 5px;
-}
-
 .layout_main{
 	float: left;
   margin-top: 5px;
@@ -155,6 +150,7 @@ TOPナビ
 	top: 5px;
 	right: 20px;
 	background: #92ba18;
+	z-index:1000;
 }
 .user_menu a{
 	color: white;
@@ -277,30 +273,27 @@ ul.left_menu li i{
 /**********************************
 グリッド
 ***********************************/
-.grid_container{
+#grid_container{
 	margin: 40px 15px 0px;
-}
-.grid_vartical{
-	float: left;
-	margin-right: 10px;
-	width: 250px;
-}
-.grid_vartical:last-child{
-	margin-right: 0px;
 }
 
 /*商品ブロック*/
 .item_block{
 	margin-bottom: 40px;
+	margin: 20px;
+}
+.item_col2{
+	width: 250px;
 }
 .item_block:hover{
-	background: rgba(255,255,255,0.3);
+	background: rgba(255,255,255,0.5);
 }
 .item_block:hover img{
 	border: 2px solid #92ba18; 
 }
 .item_block h3{
 	font-weight: bold;
+	color: #545454;
 }
 .item_block img{
 	box-shadow: 1px 1px 5px 2px #b4b4b4;
@@ -319,6 +312,10 @@ ul.left_menu li i{
 .item_block b span{
 	color: #257abb;
 	font-weight: bold;
+}
+
+.fresco_hide{
+	display:none;
 }
 
 /* 商品ブロック　コメント */
@@ -351,8 +348,5 @@ ul.left_menu li i{
 	border-left: 1px solid #89b014;
 	margin: 0px 3px;
 }
-
-
-
 
 

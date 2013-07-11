@@ -4,6 +4,11 @@ $(function(){
 	$('.tip').tooltip({placement:'bottom'});
 	$('.user_menu').profiledrop();
 	
+	$('#grid_container').masonry({
+  columnWidth: 290,
+  itemSelector: '.item_block'
+  });
+	
 });
 
 //プロフィールのドロップダウンイベント

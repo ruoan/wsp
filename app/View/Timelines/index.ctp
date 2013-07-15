@@ -1,1 +1,3 @@
-<?php var_dump($user_profile);?>
+<?php echo($user_profile);?>
+
+<?php //logout link を書く?>

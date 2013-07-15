@@ -152,10 +152,12 @@ class LoginsController extends AppController {
 	            //Authコンポーネントにてログイン
 	            //social_typeが'TW'のものに限定
 	            $this->Auth->authenticate = array('Form' => Array('scope' => array('SocialAccount.social_type' => Configure::read('Twitter.social_type'))));
-	          //  $this->Auth->scope(array(
+	            //$this->Auth->scope(array(
 	            //	'SocialAccount.social_type' => Configure::read('Twitter.social_type')));
 	            $this->Auth->login($user);
-				$this->Auth->userScope = array('User.verified' => '1');
+				//$this->Auth->userScope = array('User.verified' => '1');
+				
+				$this->redirect('/timelines/index');
 			} else {
 				return $this->cakeError('error');
 			}
@@ -172,14 +174,14 @@ class LoginsController extends AppController {
     private function updateTwitterAccount($cons_key, $cons_secret, $token, $token_secret){
        //usersデータ取得
        //ipの取得
-	   $users_info['ip']= $this->request->clientIp(false);
+	   $user_info['ip']= $this->request->clientIp(false);
 	   
 	    //OAuthコネクション取得
         $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
         $account_info = $connection->get('account/verify_credentials');
 
 		//SocialAccountモデルでレコード更新（追加）
-        $this->SocialAccount->updateInsertAccount($users_info, $token, $token_secret, $account_info);
+        $this->SocialAccount->insertUpdateTWAccount($user_info, $token, $token_secret, $account_info);
 		
 		return true;
     }

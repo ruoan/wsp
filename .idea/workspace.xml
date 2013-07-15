@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="13b3cfdd-2873-4ea9-9d3c-d9fd3c77bb5f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/LoginsController.php" afterPath="$PROJECT_DIR$/app/Controller/LoginsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Model/SocialAccount.php" afterPath="$PROJECT_DIR$/app/Model/SocialAccount.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Controller/TimelinesController.php" afterPath="$PROJECT_DIR$/app/Controller/TimelinesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/View/Timelines/index.ctp" afterPath="$PROJECT_DIR$/app/View/Timelines/index.ctp" />
     </list>
     <ignored path="wsp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +35,7 @@
       <file leaf-file-name="LoginsController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Controller/LoginsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="29" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.5305466">
+            <state line="169" column="4" selection-start="5463" selection-end="5463" vertical-scroll-proportion="0.48231512">
               <folding />
             </state>
           </provider>
@@ -51,7 +53,7 @@
       <file leaf-file-name="SocialAccount.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Model/SocialAccount.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="36" selection-start="1242" selection-end="1242" vertical-scroll-proportion="-8.958333">
+            <state line="69" column="28" selection-start="1679" selection-end="1679" vertical-scroll-proportion="-8.958333">
               <folding />
             </state>
           </provider>
@@ -60,7 +62,7 @@
       <file leaf-file-name="TimelinesController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Controller/TimelinesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="25" selection-start="1314" selection-end="1314" vertical-scroll-proportion="-16.458334">
+            <state line="53" column="8" selection-start="1362" selection-end="1362" vertical-scroll-proportion="-16.458334">
               <folding />
             </state>
           </provider>
@@ -452,14 +454,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Model/SocialAccount.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="36" selection-start="1242" selection-end="1242" vertical-scroll-proportion="-8.958333">
+        <state line="69" column="28" selection-start="1679" selection-end="1679" vertical-scroll-proportion="-8.958333">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/TimelinesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="25" selection-start="1314" selection-end="1314" vertical-scroll-proportion="-16.458334">
+        <state line="53" column="8" selection-start="1362" selection-end="1362" vertical-scroll-proportion="-16.458334">
           <folding />
         </state>
       </provider>
@@ -473,7 +475,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Controller/LoginsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="29" selection-start="1659" selection-end="1659" vertical-scroll-proportion="0.5305466">
+        <state line="169" column="4" selection-start="5463" selection-end="5463" vertical-scroll-proportion="0.48231512">
           <folding />
         </state>
       </provider>

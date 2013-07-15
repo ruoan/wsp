@@ -10,7 +10,7 @@ App::import('Model','User');
 class SocialAccount extends AppModel {
 
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -27,35 +27,54 @@ class SocialAccount extends AppModel {
 		)
 	);
 	
-	public function updateInsertAccount($users_info, $token, $token_secret, $account_info){
+	/**
+     * Twitterユーザー情報アカウント登録更新
+     */
+	public function insertUpdateTWAccount($user_info, $token, $token_secret, $account_info){
 		
-		//登録用データを編集
+		//Model: Userの生成
+		$user= new User;
+		
+		//登録更新用ユーザー情報を取得
 		//token: IDとして使用
-		$member_data['token']= $token;
+		$socialAccount_info['token']= $token;
 		//secret: パスワードとして使用
-		$member_data['secret']= $token_secret;
-		//ログイン元サイトの種類: Twitterでは"TW"
-		$member_data['social_type']= Configure::read('Twitter.social_type');
+		$socialAccount_info['secret']= $token_secret;
+		//ログイン元サイトの種別: Twitterでは"TW"
+		$socialAccount_info['social_type']= Configure::read('Twitter.social_type');
 		//フルネーム
-		$member_data['name']= $account_info->name;
+		$socialAccount_info['name']= $account_info->name;
 		//スクリーンネーム
-		$member_data['screen_name']= $account_info->screen_name;
+		$socialAccount_info['screen_name']= $account_info->screen_name;
 		//プロフィール用画像URL
-		$member_data['profile_image_url']= $account_info->profile_image_url;
+		$socialAccount_info['profile_image_url']= $account_info->profile_image_url;
 		//アカウントURL
-		$member_data['url']= $account_info->url;
+		$socialAccount_info['url']= $account_info->url;
 
 		//引数からのtokenがDBへ登録済みの既存ユーザーかを確認
-		$account_exsisting_data = $this->findByToken($token);
-		//DBが取得できた場合（既存ユーザーの場合）
-		if($account_exsisting_data){
+		$exsisting_account_info = $this->findByToken($token);
+		
+		Debugger::dump($exsisting_account_info);
+		
+		//既存ユーザーの場合(既存データあり)
+		if($exsisting_account_info){
+			//Userの情報更新
+			//User_idの取得、idへセット
+			$user_account_info['id'] = $exsisting_account_info['SocialAccount']['user_id'];
+			
+			Debugger::dump($user_info);
+			
+			//ipのセット
+			$user_account_info['ip'] = $user_info['ip'];
+			//Userの作成
+			$user->create();
+			$user->save(Array("User" => $user_account_info));
 			//取得したIDを更新データへセット
-			$member_data['id'] = $account_exsisting_data['SocialAccount']['id'];
-		//DBが取得できない場合（新規ユーザーの場合）	
+			$socialAccount_info['id'] = $exsisting_account_info['SocialAccount']['id'];
+			
+		//新規ユーザーの場合(既存データなし)
 		}else{
 			//Usersの情報取得
-			//Model: Userの生成
-			$user= new User;
 			//ipのセット
 			$users_data['ip'] = $users_info['ip'];
 			
@@ -64,9 +83,10 @@ class SocialAccount extends AppModel {
 			$user->save(Array("User" => $users_data));
 			//作成された新規idを取得、セット
 			$inserted_id = $user->getLastInsertID();
-			$member_data['user_id'] = $inserted_id;
+			$socialAccount_info['user_id'] = $inserted_id;
 		}
 		$this->create();
-		$this->save(Array("SocialAccount" => $member_data));
+		$this->save(Array("SocialAccount" => $socialAccount_info));
 	}
 }
+?>

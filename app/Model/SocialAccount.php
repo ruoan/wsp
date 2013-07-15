@@ -76,7 +76,7 @@ class SocialAccount extends AppModel {
 			
 			//Userの作成
 			$user->create();
-			$user->save(Array("User" => $users_data));
+			$user->save(Array("User" => $user_account_info));
 			//作成された新規idを取得、セット
 			$inserted_id = $user->getLastInsertID();
 			$socialAccount_info['user_id'] = $inserted_id;

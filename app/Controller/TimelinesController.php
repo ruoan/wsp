@@ -53,7 +53,9 @@ class TimelinesController extends AppController {
         //$users_id = $this->Session->
         
         
-		$user_profile=$this->Session->read('user_profile');
+		//$user_profile=$this->Session->read('user_profile');
+		//$this->set('user_profile', $user_profile);
+		$user_profile= 'OK';
 		$this->set('user_profile', $user_profile);
 
 	}

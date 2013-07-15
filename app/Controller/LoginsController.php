@@ -155,7 +155,7 @@ class LoginsController extends AppController {
 	          //  $this->Auth->scope(array(
 	            //	'SocialAccount.social_type' => Configure::read('Twitter.social_type')));
 	            $this->Auth->login($user);
-				$this->Auth->userScope = array('User.verified' => '1');	
+				$this->Auth->userScope = array('User.verified' => '1');
 			} else {
 				return $this->cakeError('error');
 			}

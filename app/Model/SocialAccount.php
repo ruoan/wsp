@@ -54,15 +54,11 @@ class SocialAccount extends AppModel {
 		//引数からのtokenがDBへ登録済みの既存ユーザーかを確認
 		$exsisting_account_info = $this->findByToken($token);
 		
-		Debugger::dump($exsisting_account_info);
-		
 		//既存ユーザーの場合(既存データあり)
 		if($exsisting_account_info){
 			//Userの情報更新
 			//User_idの取得、idへセット
 			$user_account_info['id'] = $exsisting_account_info['SocialAccount']['user_id'];
-			
-			Debugger::dump($user_info);
 			
 			//ipのセット
 			$user_account_info['ip'] = $user_info['ip'];
@@ -76,7 +72,7 @@ class SocialAccount extends AppModel {
 		}else{
 			//Usersの情報取得
 			//ipのセット
-			$users_data['ip'] = $users_info['ip'];
+			$user_account_info['ip'] = $user_info['ip'];
 			
 			//Userの作成
 			$user->create();

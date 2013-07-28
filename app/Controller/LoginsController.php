@@ -232,6 +232,10 @@ class LoginsController extends AppController {
 	// ログアウト処理
     public function logout() {
         $this->Auth->logout();
+		$this->Session->delete($this->session_key['twitter_token']);
+		$this->Session->delete($this->session_key['twitter_token_secret']);
+		$this->redirect($this->Auth->logout());
+		
     }
 }
 ?>

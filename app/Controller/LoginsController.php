@@ -176,9 +176,9 @@ class LoginsController extends AppController {
        //ipの取得
 	   $user_info['ip']= $this->request->clientIp(false);
 	   
-	    //OAuthコネクション取得
-        $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
-        $account_info = $connection->get('account/verify_credentials');
+	   //OAuthコネクション取得
+       $connection = new TwitterOAuth($cons_key, $cons_secret, $token, $token_secret);
+       $account_info = $connection->get('account/verify_credentials');
 
 		//SocialAccountモデルでレコード更新（追加）
         $this->SocialAccount->insertUpdateTWAccount($user_info, $token, $token_secret, $account_info);
@@ -228,6 +228,10 @@ class LoginsController extends AppController {
 	private function facebook_authenticate(){
 		
 	}
-
+	
+	// ログアウト処理
+    public function logout() {
+        $this->Auth->logout();
+    }
 }
 ?>

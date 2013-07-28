@@ -22,6 +22,7 @@
 App::uses('AppController', 'Controller');
 
 
+
 /**
  * Static content controller
  *
@@ -45,6 +46,8 @@ class TimelinesController extends AppController {
 	 * @var array
 	 */
 	public $uses = array();
+	
+	public $helpers = array('Form', 'Html', 'Js', 'Time');
 
 	public function index() {
 	    
@@ -59,6 +62,10 @@ class TimelinesController extends AppController {
 		$this->set('user_profile', $user_profile);
 
 	}
-
+	
+	public function logout() {
+		$this->set('user_profile', "ログアウトしました");
+	}
+	
 }
 ?>

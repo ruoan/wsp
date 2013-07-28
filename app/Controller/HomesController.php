@@ -52,7 +52,11 @@ class HomesController extends AppController {
 	function beforeFilter(){
 		//認証不要アクション設定
 		$this->Auth->allow('index');
+		if ($this->Auth->loggedIn()) {
+            $this->redirect('/timelines/index');
+        } 
 	}
+
 
 	/**
 	 * Displays a view

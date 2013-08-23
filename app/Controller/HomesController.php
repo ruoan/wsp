@@ -21,6 +21,8 @@
  */
 App::uses('AppController', 'Controller');
 
+App::import('Lib', 'AmazonECS');
+
 /**
  * Static content controller
  *
@@ -51,7 +53,7 @@ class HomesController extends AppController {
 	 */
 	function beforeFilter(){
 		//認証不要アクション設定
-		$this->Auth->allow('index');
+		$this->Auth->allow('index','amazon');
 		if ($this->Auth->loggedIn()) {
             $this->redirect('/timelines/index');
         } 
@@ -88,5 +90,22 @@ class HomesController extends AppController {
 	}
 	public function index(){
 		
+	}
+
+	public function amazon(){
+		try{
+			$amazonEcs = new AmazonECS(
+				Configure::read('Amazon.access_key_id'),
+				Configure::read('Amazon.secret_access_key'),
+				Configure::read('Amazon.associate.country_code'),
+				Configure::read('Amazon.associate.id'));
+			echo("<pre>");
+			$response = $amazonEcs->responseGroup('Large')->similarityLookup('B00AK0VKYA');
+			var_dump($response);
+			echo("</pre>");
+
+		}catch(Exception $e){
+			echo $e->getMessage();
+		}
 	}
 }
